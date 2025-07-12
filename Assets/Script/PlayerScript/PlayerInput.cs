@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour
         // 대각선 이동거리 문제로 인한 normalized는 인풋에서 처리
         MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         // 공격은 마우스 좌클릭으로 설정
-        AttackInput = Input.GetMouseButtonDown(0);
+        // 공격도중에 회전을 막기위해 임시로 GetMoustButton으로 변경, 이후 공격모션 도중으로 변경하는 등으로 변경
+        AttackInput = Input.GetMouseButton(0);
     }
 }

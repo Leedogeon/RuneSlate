@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
         // Slerp를 이용하여 자연스럽게 회전하게 하고
         // 회전에 y값은 영향받지 않게 할려고 newVelocity가 아닌 dir을 이용
         // rotateSpeed는 적당히 자연스러운 느낌을 받게 커스텀 조정
+        // 임시로 공격키가 입력중일땐 방향전환은 하지않도록 설정 - 이후 공격 모션도중 안하는걸로 수정
+        if(!input.AttackInput)
         transform.forward = Vector3.Slerp(transform.forward, dir, Time.deltaTime * rotateSpeed);
 
     }
