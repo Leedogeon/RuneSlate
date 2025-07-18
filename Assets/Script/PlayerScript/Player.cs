@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         // 공격 인풋 테스트중
         if(Input.AttackInput)
         {
-            Debug.Log("test");
+            Debug.Log("Attack_Main");
         }
     }
 }
