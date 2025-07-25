@@ -9,8 +9,11 @@ public class PlayerManager : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject PlayerInstance { get; private set; }
 
+    public MapManager mapManager;
+    public Transform SpawnPoint;
     private void Awake()
     {   
+        mapManager = FindObjectOfType<MapManager>();
         SpawnStart();
         if (Instance == null)
         {
@@ -19,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     }
     
+
     /// <summary>
     /// 원하는 위치에 플레이어 소환
     /// </summary>
@@ -38,7 +42,13 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     public void SpawnStart()
     {
+        if(mapManager != null)
+        {
+            SpawnPlayer(mapManager.SpawnPoint.position);
+            Debug.Log("test");
+        }
         // 테스트용으로 0,0,0 에 소환하는 용도
-        SpawnPlayer(Vector3.zero);
+        else SpawnPlayer(Vector3.zero);
+
     }
 }
