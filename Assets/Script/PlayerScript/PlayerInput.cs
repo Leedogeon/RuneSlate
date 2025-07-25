@@ -9,6 +9,17 @@ public class PlayerInput : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool AttackInput { get; private set; }
 
+    #region 스킬관련
+    static int SkillNum = 4;
+
+    // 나중에 함께 관리하는 경우가 있을까봐 미리 배열로 제작
+    public bool[] SkillInput { get; private set; } = new bool[SkillNum];
+    public bool Skill1 => SkillInput[0];
+    public bool Skill2 => SkillInput[1];
+    public bool Skill3 => SkillInput[2];
+    public bool Skill4 => SkillInput[3];
+
+    #endregion
     // Update is called once per frame
     void Update()
     {
@@ -22,6 +33,11 @@ public class PlayerInput : MonoBehaviour
         //AttackInput = Input.GetMouseButton(0);
         // 입력값변화를 위해 KeyManger를 만들어 활용
         AttackInput = Input.GetKeyDown(KeySetting.keys[KeyAction.ATTACK]);
+        SkillInput[0] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL1]);
+        SkillInput[1] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL2]);
+        SkillInput[2] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL3]);
+        SkillInput[3] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL4]);
+
     }
 
     /// <summary>
