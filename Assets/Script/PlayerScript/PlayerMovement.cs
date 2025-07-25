@@ -28,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
         // 중력의 영향을 정상적으로 받기위해 y값을 따로 설정
         // x,z값의 경우 speed의 영향을 받아야하니 먼저 곱해주고 y값은 따로 설정
         Vector3 newVelocity = dir * speed;
-        newVelocity.y = Rigid.velocity.y;
+        if (Rigid.velocity.y > 0.5f) newVelocity.y = 0;
+        else newVelocity.y = Rigid.velocity.y;
         Rigid.velocity = newVelocity;
 
         // 캐릭터의 forward를 이용해서 회전시킨다
