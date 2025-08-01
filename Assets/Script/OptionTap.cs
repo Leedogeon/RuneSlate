@@ -94,7 +94,6 @@ public class OptionTap : MonoBehaviour
         {
             saveload.player = PlayerManager.Instance.PlayerInstance;
             saveload.SaveToFile(0);
-            //saveload.SaveGame();
         }
         else
         {
