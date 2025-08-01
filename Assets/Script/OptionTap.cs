@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class OptionTap : MonoBehaviour
 {
     [SerializeField] private GameObject OptionPannel;
+    [SerializeField] private SaveLoad saveload;
+    //[SerializeField] private GameObject player;
     MapManager mapManager;
     public bool OptionOpened = false;
 
@@ -20,6 +22,8 @@ public class OptionTap : MonoBehaviour
     {
         mapManager = FindObjectOfType<MapManager>();
         raycaster = FindObjectOfType<GraphicRaycaster>();
+
+        saveload = FindObjectOfType<SaveLoad>();
     }
     private void Update()
     {
@@ -78,5 +82,28 @@ public class OptionTap : MonoBehaviour
         menuButtons[selectIndex].GetComponent<Image>().color = Color.white;
         selectIndex = curIndex;
         menuButtons[selectIndex].GetComponent<Image>().color = Color.green;
+    }
+
+    // 세이브 로드
+    public void OpenSaveLoad(bool isSave)
+    {
+        Debug.Log(isSave + "curIndex = " + selectIndex);
+        // isSave가 true이면 세이브, false면 로드
+        // saveload의 player를 현재 PlayerInstance로 수정하고 저장
+        if (isSave)
+        {
+            saveload.player = PlayerManager.Instance.PlayerInstance;
+            saveload.SaveToFile(0);
+            //saveload.SaveGame();
+        }
+        else
+        {
+            saveload.player = PlayerManager.Instance.PlayerInstance;
+            saveload.LoadFromFile(0);
+        }
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
