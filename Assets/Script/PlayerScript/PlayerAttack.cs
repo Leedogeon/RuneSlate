@@ -7,10 +7,12 @@ public class PlayerAttack : MonoBehaviour
     PlayerInput input;
     Rigidbody Rigid;
     LayerMask groundMask;
+    PlayerAnimationController animCon;
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
         Rigid = GetComponent<Rigidbody>();
+        animCon = GetComponent<PlayerAnimationController>();
         groundMask = LayerMask.GetMask("Ground");
     }
 
@@ -21,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(input.AttackInput)
         {
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
                 Vector3 dir = hit.point - transform.position;
                 // 수평회전을 막기위해 y값은 0으로
