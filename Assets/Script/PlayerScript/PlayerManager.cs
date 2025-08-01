@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     public MapManager mapManager;
     public Transform SpawnPoint;
+    public GameObject Test;
     private void Awake()
     {   
         mapManager = FindObjectOfType<MapManager>();
@@ -36,6 +37,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(PlayerInstance);
         }
         PlayerInstance = Instantiate(PlayerPrefab,SpawnPos,Quaternion.identity);
+        
     }
     /// <summary>
     /// 0,0,0에 소환
@@ -50,5 +52,13 @@ public class PlayerManager : MonoBehaviour
         // 테스트용으로 0,0,0 에 소환하는 용도
         else SpawnPlayer(Vector3.zero);
 
+    }
+
+    public void effectSpawn()
+    {
+        Vector3 effectPos = PlayerInstance.transform.position + new Vector3(0, 2, 0);
+        GameObject effect1 = Instantiate(Test, effectPos, Quaternion.Euler(-180, 0, 0));
+
+        Destroy(effect1, 1f);
     }
 }
