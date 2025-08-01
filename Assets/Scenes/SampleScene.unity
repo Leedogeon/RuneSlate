@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 329558753}
   - component: {fileID: 329558752}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: "\uC885\uB8CC"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -675,7 +675,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 329558753}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1638857919}
+        m_TargetAssemblyTypeName: OptionTap, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &329558753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366003935}
   - component: {fileID: 366003934}
+  - component: {fileID: 366003936}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -860,6 +873,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &366003936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366003933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3751baafe0ec1b4d9a1207db1def942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &373608074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1538,7 @@ GameObject:
   - component: {fileID: 582664748}
   - component: {fileID: 582664747}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: "\uB85C\uB4DC"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1582,7 +1607,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 582664748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1638857919}
+        m_TargetAssemblyTypeName: OptionTap, Assembly-CSharp
+        m_MethodName: OpenSaveLoad
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &582664748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2801,7 +2838,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: "\uC800\uC7A5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d4b77c112cf2314c8915053ccacdff7, type: 2}
   m_sharedMaterial: {fileID: 517500496497283692, guid: 6d4b77c112cf2314c8915053ccacdff7, type: 2}
@@ -2996,7 +3033,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6
+  m_text: "\uC885\uB8CC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d4b77c112cf2314c8915053ccacdff7, type: 2}
   m_sharedMaterial: {fileID: 517500496497283692, guid: 6d4b77c112cf2314c8915053ccacdff7, type: 2}
@@ -3130,7 +3167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: "\uBD88\uB7EC\uC624\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d4b77c112cf2314c8915053ccacdff7, type: 2}
   m_sharedMaterial: {fileID: 517500496497283692, guid: 6d4b77c112cf2314c8915053ccacdff7, type: 2}
@@ -3576,7 +3613,7 @@ GameObject:
   - component: {fileID: 1677098569}
   - component: {fileID: 1677098568}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: "\uC800\uC7A5"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3645,7 +3682,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1677098569}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1638857919}
+        m_TargetAssemblyTypeName: OptionTap, Assembly-CSharp
+        m_MethodName: OpenSaveLoad
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1677098569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3968,6 +4017,7 @@ MonoBehaviour:
   mapManager: {fileID: 0}
   SpawnPoint: {fileID: 5186735023777053022, guid: ac8efb728f1fb9b4092c4df591c827ca, type: 3}
   Test: {fileID: 4285472108613674439, guid: 73d75b30cf9ec3743935658d6c0b8cbf, type: 3}
+  saveload: {fileID: 0}
 --- !u!1 &1905034652
 GameObject:
   m_ObjectHideFlags: 0
