@@ -13,9 +13,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Option()
     {
-
     }
-
     public void Exit()
     {
         // Á¾·á
