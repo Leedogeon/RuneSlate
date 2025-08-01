@@ -12,15 +12,23 @@ public class PlayerManager : MonoBehaviour
     public MapManager mapManager;
     public Transform SpawnPoint;
     public GameObject Test;
+
+    public SaveLoad saveload;
     private void Awake()
     {   
         mapManager = FindObjectOfType<MapManager>();
+        saveload = FindObjectOfType<SaveLoad>();
+        
         SpawnStart();
         if (Instance == null)
         {
             Instance = this;
         }
-
+        // 로드할 플레이어를 PlayerInstance로 변경
+        saveload.player = PlayerInstance;
+        //saveload.LoadGame();
+        // 임시로 0번파일로 지정
+        saveload.LoadFromFile(0);
     }
     
 
