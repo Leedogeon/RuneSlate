@@ -9,9 +9,12 @@ public class PlayerInput : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool AttackInput { get; private set; }
     public bool WalkInput { get; private set; }
+    public bool DashInput { get; private set; }
 
-    MapManager mapManager;
-    PlayerAnimationController animCon;
+    [SerializeField] GameObject point;
+    [SerializeField]MapManager mapManager;
+    [SerializeField]PlayerAnimationController animCon;
+    Potion_Heal heal;
     #region ½ºÅ³°ü·Ã
     static int SkillNum = 4;
 
@@ -28,7 +31,8 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         mapManager = FindObjectOfType<MapManager>();
-        animCon = GetComponent<PlayerAnimationController>();
+        animCon = transform.parent.GetComponentInChildren<PlayerAnimationController>();
+        heal = transform.parent.GetComponentInChildren<Potion_Heal>();
     }
     void Update()
     {
@@ -46,8 +50,12 @@ public class PlayerInput : MonoBehaviour
         SkillInput[1] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL2]);
         SkillInput[2] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL3]);
         SkillInput[3] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL4]);
+        // °È±â´Â »©´Â°É·Î ±âÈ¹ º¯°æ
         WalkInput = Input.GetKey(KeySetting.keys[KeyAction.WALK]);
-
+        DashInput = Input.GetKey(KeySetting.keys[KeyAction.DASH]);
+        // ÀÓ½Ã Èú
+        if (Input.GetKeyDown(KeyCode.Q))
+            heal.Heal_Player(10);
     }
 
     /// <summary>
