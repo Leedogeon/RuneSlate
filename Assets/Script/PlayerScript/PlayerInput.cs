@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
         // 공격도중에 회전을 막기위해 임시로 GetMoustButton으로 변경, 이후 공격모션 도중으로 변경하는 등으로 변경
         //AttackInput = Input.GetMouseButton(0);
         // 입력값변화를 위해 KeyManger를 만들어 활용
-        AttackInput = Input.GetKey(KeySetting.keys[KeyAction.ATTACK]);
+        AttackInput = Input.GetKeyDown(KeySetting.keys[KeyAction.ATTACK]);
         SkillInput[0] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL1]);
         SkillInput[1] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL2]);
         SkillInput[2] = Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL3]);

@@ -6,6 +6,7 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] Animator anim;
     PlayerInput input;
+    bool IsAttack = false;
     private void Awake()
     {
         input = transform.parent.GetComponentInChildren<PlayerInput>();
@@ -23,5 +24,9 @@ public class PlayerAnimationController : MonoBehaviour
             anim.SetBool("IsRunning", false);
             anim.SetBool("IsWalk", false);
         }
+    }
+    public void Attack()
+    {
+        anim.SetTrigger("OneHandAttack");
     }
 }

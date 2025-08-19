@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]Rigidbody Rigid;
     LayerMask groundMask;
     [SerializeField] PlayerAnimationController animCon;
+    [SerializeField]bool IsAttack = false;
     private void Awake()
     {
         input = transform.parent.GetComponentInChildren<PlayerInput>();
@@ -30,8 +31,17 @@ public class PlayerAttack : MonoBehaviour
                 dir.y = 0;
                 // 회전
                 transform.parent.forward = dir.normalized;
-                Debug.Log("Attack");
+                StartCoroutine(Attack());
             }
         }
+    }
+
+    public IEnumerator Attack()
+    {
+        // 임시적용 - animCon.Attack(); 외에 기능없음
+        IsAttack = true;
+        animCon.Attack();
+        yield return new WaitForSeconds(3f);
+        IsAttack = false;
     }
 }
