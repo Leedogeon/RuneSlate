@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    PlayerInput input;
-    Rigidbody Rigid;
+    [SerializeField]PlayerInput input;
+    [SerializeField]Rigidbody Rigid;
     LayerMask groundMask;
-    PlayerAnimationController animCon;
+    [SerializeField] PlayerAnimationController animCon;
     private void Awake()
     {
-        input = GetComponent<PlayerInput>();
-        Rigid = GetComponent<Rigidbody>();
-        animCon = GetComponent<PlayerAnimationController>();
+        input = transform.parent.GetComponentInChildren<PlayerInput>();
+        Rigid = GetComponentInParent<Rigidbody>();
+        animCon = transform.parent.GetComponentInChildren<PlayerAnimationController>();
         groundMask = LayerMask.GetMask("Ground");
     }
 
@@ -25,11 +25,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
-                Vector3 dir = hit.point - transform.position;
+                Vector3 dir = hit.point - transform.parent.position;
                 // 수평회전을 막기위해 y값은 0으로
                 dir.y = 0;
                 // 회전
-                transform.forward = dir.normalized;
+                transform.parent.forward = dir.normalized;
                 Debug.Log("Attack");
             }
         }

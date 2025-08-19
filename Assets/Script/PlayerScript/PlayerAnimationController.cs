@@ -8,8 +8,8 @@ public class PlayerAnimationController : MonoBehaviour
     PlayerInput input;
     private void Awake()
     {
-        input = GetComponent<PlayerInput>();
-        anim = GetComponent<Animator>();
+        input = transform.parent.GetComponentInChildren<PlayerInput>();
+        anim = GetComponentInParent<Animator>();
     }
     public void MoveDirection(Vector2 moveInput, bool isWalk)
     {

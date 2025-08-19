@@ -6,13 +6,12 @@ public class Player : MonoBehaviour
 {
     // 다른 스크립트에서 입력값을 받을수는 있지만, 수정은 불가능하게 캡슐화
     // 코드를 나눠서 제작중
-    public PlayerInput Input { get; private set; }
-    public PlayerMovement Movement { get; private set; }
-
+    [SerializeField] PlayerInput Input;
+    [SerializeField] PlayerMovement Movement;
     private void Awake()
     {
-        Input = GetComponent<PlayerInput>();
-        Movement = GetComponent<PlayerMovement>();
+        Input = GetComponentInChildren<PlayerInput>();
+        Movement = GetComponentInChildren<PlayerMovement>();
     }
 
     void Start()
@@ -24,5 +23,6 @@ public class Player : MonoBehaviour
         if(Input.AttackInput)
         {
         }
+
     }
 }
