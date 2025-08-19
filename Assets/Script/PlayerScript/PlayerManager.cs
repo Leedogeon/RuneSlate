@@ -25,10 +25,13 @@ public class PlayerManager : MonoBehaviour
             Instance = this;
         }
         // 로드할 플레이어를 PlayerInstance로 변경
-        saveload.player = PlayerInstance;
-        //saveload.LoadGame();
-        // 임시로 0번파일로 지정
-        saveload.LoadFromFile(0);
+        if (saveload)
+        {
+            saveload.player = PlayerInstance;
+            //saveload.LoadGame();
+            // 임시로 0번파일로 지정
+            saveload.LoadFromFile(0);
+        }
     }
     
 
@@ -45,7 +48,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(PlayerInstance);
         }
         PlayerInstance = Instantiate(PlayerPrefab,SpawnPos,Quaternion.identity);
-        
+
     }
     /// <summary>
     /// 0,0,0에 소환
@@ -55,7 +58,6 @@ public class PlayerManager : MonoBehaviour
         if(mapManager != null)
         {
             SpawnPlayer(mapManager.SpawnPoint.position);
-            Debug.Log("test");
         }
         // 테스트용으로 0,0,0 에 소환하는 용도
         else SpawnPlayer(Vector3.zero);
