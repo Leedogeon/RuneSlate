@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
-    PlayerInput input;
+    [SerializeField]PlayerInput input;
     private void Awake()
     {
-        input = GetComponent<PlayerInput>();
+        input = transform.parent.GetComponentInChildren<PlayerInput>();
     }
 
     private void Update()
