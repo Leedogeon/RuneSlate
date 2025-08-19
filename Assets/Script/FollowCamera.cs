@@ -17,6 +17,7 @@ public class FollowCamera : MonoBehaviour
         if (Player == null) return;
         // offset으로 카메라 위치 조정
         // 각도는 우선 유니티 인스펙터에서 설정
-        transform.position = Player.position + offset; 
+        transform.position = Player.position + offset;
+
     }
 }
