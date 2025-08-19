@@ -5073,7 +5073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e5bb36b22b9404c8db60d72badc138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 7788061497241091190, guid: b3399c3a1b579854d877f0c23a3e50d0, type: 3}
+  PlayerPrefab: {fileID: 7871453887802199707, guid: 3d4bb64f3b1f84b45a2cf7d663f595df, type: 3}
   mapManager: {fileID: 0}
   SpawnPoint: {fileID: 853990969}
   Test: {fileID: 4285472108613674439, guid: 73d75b30cf9ec3743935658d6c0b8cbf, type: 3}
