@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject prologue;
     public bool CanInteraction = false;
     [SerializeField] private GameObject OptionPanel;
+    [SerializeField] private GameObject HPUI;
 
     private void Update()
     {
@@ -23,6 +24,7 @@ public class MapManager : MonoBehaviour
     // 다른 Obj들에게도 적용하기위해 변경 - 08.01
     public void invisivleObj(GameObject obj)
     {
+        if (obj.name == "Prologue") HPUI.SetActive(true);
         if (obj == null) return;
         // 현재 obj의 활성화 상태를 이용
         bool isAct = obj.activeSelf;
