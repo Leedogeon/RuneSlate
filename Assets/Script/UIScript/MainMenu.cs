@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject OptionTap;
     public void GameStart()
     {
         SceneManager.LoadSceneAsync("SampleScene");
     }
     public void Option()
     {
+        OptionTap.SetActive(true);
     }
     public void Exit()
     {
