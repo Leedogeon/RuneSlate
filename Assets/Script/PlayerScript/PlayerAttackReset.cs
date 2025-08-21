@@ -10,5 +10,8 @@ public class PlayerAttackReset : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger(triggerName);
+        GameObject player = PlayerManager.Instance.PlayerInstance;
+
+        player.GetComponentInChildren<PlayerAttack>().IsAttack = false;
     }
 }
