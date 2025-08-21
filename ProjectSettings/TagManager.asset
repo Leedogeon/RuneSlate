@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ManaSprite
+  - HealthSprite
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
@@ -36,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - MapWall
   m_SortingLayers:
   - name: Default
     uniqueID: 0
