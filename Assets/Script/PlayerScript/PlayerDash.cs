@@ -13,12 +13,14 @@ public class PlayerDash : MonoBehaviour
     bool canDash = true;
     [SerializeField]GameObject Player;
     [SerializeField] LayerMask Ground;
+    [SerializeField] LayerMask mapWallLayer;
+    [SerializeField] GameObject TestBlock;
     Vector3 direction;
     public void Awake()
     {
         movement = GetComponent<PlayerMovement>();
     }
-    public IEnumerator Dash()
+/*    public IEnumerator Dash()
     {
         if (!canDash) yield break;
         isDash = true;
@@ -42,7 +44,7 @@ public class PlayerDash : MonoBehaviour
             {
                 //direction = new Vector3(movement.input.MoveInput.x, 0, movement.input.MoveInput.y).normalized;
                 direction = movement.Rigid.velocity;
-                targetPos = startPos+ direction;
+                targetPos = startPos + direction;
             }
             else // 정지상태라면 플레이어 인스턴스를 이용해 forward 방향으로
             {
@@ -50,7 +52,8 @@ public class PlayerDash : MonoBehaviour
                 direction = Player.transform.forward.normalized;
                 targetPos = startPos + direction * dashDistance;
 
-            }            
+            }
+
             float duration = .3f;
             float elapsed = 0f;
 
@@ -61,14 +64,113 @@ public class PlayerDash : MonoBehaviour
 
                 // 경사를 체크하여서 y값이 달라지면 조정
                 Vector3 pos = movement.transform.parent.position = Vector3.Lerp(startPos, targetPos, t);
-                if (Physics.Raycast(pos + Vector3.up * 2f, Vector3.down, out RaycastHit hit, 5f,Ground))
+
+                movement.Rigid.MovePosition(pos);
+                if (Physics.Raycast(pos + Vector3.up * 2f, Vector3.down, out RaycastHit hit, 5f, Ground))
                 {
-                    pos.y = hit.point.y; // 땅 높이에 맞춤
-                    movement.transform.parent.position = pos;
+
+                    if (hit.point.y > pos.y)
+                    {
+                        pos.y = hit.point.y; // 경사를 따라 올라가도록 y값 보정
+                    }
+                    movement.Rigid.MovePosition(pos);
                 }
                 yield return null;
             }
         }
+        isDash = false;
+        yield return new WaitForSeconds(DashCoolDown);
+        canDash = true;
+    }*/
+
+
+    public IEnumerator Dash()
+    {
+        if (!canDash) yield break;
+        isDash = true;
+        canDash = false;
+
+        // Rigidbody 컴포넌트 변수
+        Rigidbody rigid = movement.Rigid;
+
+        // 대시 시작 지점
+        Vector3 startPos = rigid.position;
+
+        Vector3 targetPos;
+
+        // 대시 방향 설정
+        Vector3 direction;
+        if (movement.input.MoveInput != Vector2.zero)
+        {
+            direction = rigid.velocity;
+            targetPos = startPos + direction;
+        }
+        else
+        {
+            Player = PlayerManager.Instance.PlayerInstance;
+            direction = Player.transform.forward.normalized;
+            targetPos = startPos + direction * movement.speed;
+        }
+
+        Debug.Log("direction = " + direction.normalized);
+
+        float duration = .3f;
+        float elapsed = 0f;
+
+        // 이동 허용 여부를 판단하는 변수
+        bool canMove = true;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            if (Physics.Raycast(rigid.position, direction, 1f, mapWallLayer))
+            {
+                Debug.Log("MapEnd");
+                canMove = false;
+            }
+
+            // 앞으로 1m, 아래로 1m 지점에 레이를 쏴서 지형 경사 감지
+            RaycastHit hit;
+            if (Physics.Raycast(rigid.position + direction * 1f + Vector3.up * 1f, Vector3.down, out hit, 2f, Ground))
+            {
+                // 지형의 법선 벡터(normal)를 얻어옴
+                Vector3 groundNormal = hit.normal;
+
+                // Vector3.up(수직)과 groundNormal 사이의 각도를 측정
+                float slopeAngle = Vector3.Angle(Vector3.up, groundNormal);
+
+                // 경사각이 45도를 넘으면 이동을 멈춥니다.
+                if (slopeAngle > 45f)
+                {
+                    Debug.Log("Wall");
+                    // 벽에 닿으면 최종 목적지를 hit.point로 변경
+                    targetPos = hit.point;
+                }
+            }
+
+            // canMove가 true일 때만 위치를 이동시킵니다.
+            if (canMove)
+            {
+                Vector3 nextPos = Vector3.Lerp(startPos, targetPos, t);
+
+                // y값 보정 로직 (기존 코드)
+                RaycastHit yHit;
+                if (Physics.Raycast(nextPos + Vector3.up * 2f, Vector3.down, out yHit, 5f, Ground))
+                {
+                    if (yHit.point.y > nextPos.y)
+                    {
+                        nextPos.y = yHit.point.y;
+                    }
+                }
+
+                rigid.MovePosition(nextPos);
+            }
+
+            yield return null;
+        }
+
         isDash = false;
         yield return new WaitForSeconds(DashCoolDown);
         canDash = true;
