@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     float walkSpeed = .5f;
     float rotateSpeed = 10f;
 
+    [SerializeField] PlayerAttack isattack;
     private void Awake()
     {
         input = transform.parent.GetComponentInChildren<PlayerInput>();
@@ -24,10 +25,12 @@ public class PlayerMovement : MonoBehaviour
         animCon = transform.parent.GetComponentInChildren<PlayerAnimationController>();
         Dash = transform.parent.GetComponentInChildren<PlayerDash>();
         cam = FindObjectOfType<FollowCamera>().transform;
+        isattack = transform.parent.GetComponentInChildren<PlayerAttack>();
     }
 
     private void FixedUpdate()
     {
+        if (isattack.IsAttack) return;
         // 이동값, normalized는 input에서 미리 처리
         Vector3 dir = new Vector3(input.MoveInput.x, 0, input.MoveInput.y).normalized;
         // 자연스럽게 하기위해 velocity 사용
