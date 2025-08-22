@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject OptionPannel;
-    [SerializeField] private SaveLoad saveload;
+    [SerializeField] private SaveLoadButton saveloadbtn;
+    public GameObject savepanel;
     //[SerializeField] private GameObject player;
     MapManager mapManager;
     public bool OptionOpened = false;
@@ -22,7 +23,8 @@ public class PauseMenu : MonoBehaviour
     {
         mapManager = FindObjectOfType<MapManager>();
         raycaster = FindObjectOfType<GraphicRaycaster>();
-        saveload = FindObjectOfType<SaveLoad>();
+        /*saveload = GameObject.Find("SaveLoadPanel").GetComponent<SaveLoad>();*/
+
     }
     private void Update()
     {
@@ -86,20 +88,24 @@ public class PauseMenu : MonoBehaviour
     // 세이브 로드
     public void OpenSaveLoad(bool isSave)
     {
-        Debug.Log(isSave + "curIndex = " + selectIndex);
+        //Debug.Log(isSave + "curIndex = " + selectIndex);
         // isSave가 true이면 세이브, false면 로드
         // saveload의 player를 현재 PlayerInstance로 수정하고 저장
-        if (isSave)
-        {
-            saveload.player = PlayerManager.Instance.PlayerInstance;
-            saveload.SaveToFile(0);
-        }
-        else
-        {
-            saveload.player = PlayerManager.Instance.PlayerInstance;
-            saveload.LoadFromFile(0);
-        }
+        savepanel.SetActive(true);
+
+        saveloadbtn.IsSave = isSave;
+        mapManager.IsSaveLoadOpen = true;
+        
     }
+    public void SaveFile(int Index)
+    {
+        Vector3 PlayerPos = PlayerManager.Instance.PlayerInstance.transform.position;
+        SaveLoad.SaveToFile(Index,PlayerPos);
+        // savepanel 닫기
+        mapManager.invisivleObj(savepanel);
+    }
+    // Load의 경우는 SaveLoadButton에서 처리하는게 나을것으로 판단해서 이동, save는 고려중
+
 
     public void ResolutionOpen()
     {

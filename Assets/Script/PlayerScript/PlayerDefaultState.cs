@@ -7,5 +7,7 @@ using UnityEngine;
 public class PlayerDefaultState
 {
     public float BaseHp = 100;
+    public Vector3 StartPos;
+    public int Lv = 1;
 
 }

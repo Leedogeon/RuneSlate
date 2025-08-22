@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable] // 이게있어야 JsonUtility가 직렬화 가능
@@ -11,5 +12,8 @@ public class SaveData
 
     public int hp;
     public int level;
+
+    public int playTime;
+    public string Chapter;
 
 }

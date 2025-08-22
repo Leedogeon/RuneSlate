@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-public class SaveLoad : MonoBehaviour
+// static으로 관리하는것이 편할것으로 예상되어 static으로 변경
+// 오류나는 부분 수정중
+public static class SaveLoad
 {
-   
-    [SerializeField] public GameObject player;
-
-
-
     /*    #region 레지스트리식 저장
         // 플레이어의 X,Y,Z값 저장
         public void SaveGame()
@@ -38,12 +35,12 @@ public class SaveLoad : MonoBehaviour
     #region JSON저장
     // 현재 미완성, 파일을 0번으로 지정하여 0번만 사용중
 
-    public void SaveToFile(int slot)
+    public static void SaveToFile(int slot,Vector3 PlayerPos)
     {
         SaveData data = new SaveData();
-        data.playerX = player.transform.position.x;
-        data.playerY = player.transform.position.y;
-        data.playerZ = player.transform.position.z;
+        data.playerX = PlayerPos.x;
+        data.playerY = PlayerPos.y;
+        data.playerZ = PlayerPos.z;
         // 임시 데이터
         data.hp = 100;
         data.level = 5;
@@ -54,25 +51,33 @@ public class SaveLoad : MonoBehaviour
         Debug.Log("Saved to: " + GetPath(slot));
     }
 
-    public void LoadFromFile(int slot)
+
+    public static bool LoadFromFile(int slot)
     {
         string path = GetPath(slot);
         // 저장된 파일이 없다면 return
         if (!File.Exists(path))
         {
             Debug.LogWarning("Save file not found: " + path);
-            return;
+            return false;
         }
 
         string json = File.ReadAllText(path);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-        // 저장된 위치로 플레이어 이동
-        player.transform.position = new Vector3(data.playerX, data.playerY, data.playerZ);
+        // 필요한 데이터 저장
+        Debug.Log($"X = {data.playerX} , Y = {data.playerY}, Z = {data.playerZ}");
+
+        PlayerDataControll.PlayerStartPosFromLoad = new Vector3(data.playerX, data.playerY, data.playerZ);
+        PlayerDataControll.Lv = data.level;
+        PlayerDataControll.PlayTime = data.playTime;
+
+        //player.transform.position = new Vector3(data.playerX, data.playerY, data.playerZ);
         Debug.Log("Loaded from: " + path);
+        return true;
     }
 
-    private string GetPath(int slot)
+    public static string GetPath(int slot)
     {
         return Application.persistentDataPath + $"/save{slot}.json";
     }
