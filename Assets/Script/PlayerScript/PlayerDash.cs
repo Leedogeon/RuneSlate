@@ -147,6 +147,7 @@ public class PlayerDash : MonoBehaviour
                     Debug.Log("Wall");
                     // 벽에 닿으면 최종 목적지를 hit.point로 변경
                     targetPos = hit.point;
+                    // => 이동하면서 체크를 계속해서 대쉬 거리가 늘어나는 상태라서 수정필요
                 }
             }
 

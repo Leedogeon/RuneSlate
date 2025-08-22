@@ -29,7 +29,5 @@ public class TextScript : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         mapManager.invisivleObj(gameObject);
-        
-
     }
 }
