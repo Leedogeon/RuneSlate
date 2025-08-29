@@ -465,6 +465,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8a5031ec03e413439aebd3f2f0c7382, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1082271958561512970, guid: a8a5031ec03e413439aebd3f2f0c7382, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -560,6 +564,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8a5031ec03e413439aebd3f2f0c7382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2693719381223900274}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8a5031ec03e413439aebd3f2f0c7382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -737658108649504859}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8a5031ec03e413439aebd3f2f0c7382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5288884726396001287}
   m_SourcePrefab: {fileID: 100100000, guid: a8a5031ec03e413439aebd3f2f0c7382, type: 3}
 --- !u!4 &7383323074187301921 stripped
 Transform:
@@ -654,5 +664,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40048fa17f56b6e4f9aecb2971fa20b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Input: {fileID: 0}
+  input: {fileID: 0}
   Movement: {fileID: 0}
+  questionMark: {fileID: 4285472108613674439, guid: 73d75b30cf9ec3743935658d6c0b8cbf, type: 3}
+--- !u!114 &-737658108649504859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871453887802199707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0092f8bc98b0bf4998472ba6c948368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ta:
+  - {fileID: 11400000, guid: d0875c95840aede40944591d03063a77, type: 2}
+  cinemachineBrain: {fileID: 0}
+--- !u!320 &5288884726396001287
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871453887802199707}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: d0875c95840aede40944591d03063a77, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 5210087754824867315, guid: d0875c95840aede40944591d03063a77, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References:
+    - 7cc2808b78dad464e8075a719f25662a: {fileID: 0}
+    - 522889c1ed03e264692f34b273b844aa: {fileID: 0}
+    - d7dbc3caeda53f6409bc05d07b134b30: {fileID: 0}
