@@ -292,7 +292,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New StateMachine
+  m_Name: AttackCombo
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 7568131020522645616}
@@ -648,7 +648,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -521698008304029470}
-    m_Position: {x: 410, y: -140, z: 0}
+    m_Position: {x: 290, y: 50, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions:
   - {fileID: 5627185780124573207}
