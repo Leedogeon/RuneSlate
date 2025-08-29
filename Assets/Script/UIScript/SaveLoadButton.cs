@@ -74,12 +74,19 @@ public class SaveLoadButton : MonoBehaviour
     // 이부분은 모든 씬에서 공동으로 활용
     public void LoadFile(int Index)
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
         SaveLoad.LoadFromFile(Index);
         Debug.Log("index = " + Index);
         // savepanel 닫기
         // mapManager.invisivleObj(savepanel); ==> 어디에서 해도 적용되도록 변경해야됨
         gameObject.SetActive(false); // => 게임씬에 적용될 다른부분 mapManger에서 오류없는지 체크해야됨
-        string currentSceneName = SceneManager.GetActiveScene().name;
+        
+        // 임시처리부분
+        MapManager manager = FindObjectOfType<MapManager>();
+        if (manager != null)
+        {
+            manager.IsSaveLoadOpen = false;
+        }
         if(currentSceneName == "MainMenu")
         {
             SceneManager.LoadSceneAsync("Tutorial");

@@ -45,7 +45,7 @@ public class MapManager : MonoBehaviour
         if (obj.name == "SaveLoadPanel")
         {
             Debug.Log("SaveLoadOpen");
-            IsSaveLoadOpen = !isAct;
+            IsSaveLoadOpen = false;
         }
     }
 
