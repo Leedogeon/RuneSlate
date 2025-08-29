@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 // static으로 관리하는것이 편할것으로 예상되어 static으로 변경
 // 오류나는 부분 수정중
 public static class SaveLoad
@@ -56,9 +57,17 @@ public static class SaveLoad
     {
         string path = GetPath(slot);
         // 저장된 파일이 없다면 return
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
         if (!File.Exists(path))
         {
-            Debug.LogWarning("Save file not found: " + path);
+            if (currentSceneName == "MainMenu")
+            {
+                SceneManager.LoadSceneAsync("Tutorial");
+                return false;
+            }
+
+                Debug.LogWarning("Save file not found: " + path);
             return false;
         }
 
@@ -72,7 +81,13 @@ public static class SaveLoad
         PlayerDataControll.Lv = data.level;
         PlayerDataControll.PlayTime = data.playTime;
 
-        //player.transform.position = new Vector3(data.playerX, data.playerY, data.playerZ);
+        // 인스턴스가 있는상태라면 이동 -> 추가해야됨
+        if(currentSceneName != "MainMenu")
+        {
+            if (PlayerManager.Instance.PlayerInstance != null)
+                PlayerManager.Instance.PlayerInstance.transform.position = new Vector3(data.playerX, data.playerY, data.playerZ);
+        }
+        
         Debug.Log("Loaded from: " + path);
         return true;
     }
