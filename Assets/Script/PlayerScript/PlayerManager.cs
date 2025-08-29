@@ -9,13 +9,14 @@ public class PlayerManager : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject PlayerInstance { get; private set; }
 
+    public CinemachinePlayerFind cinemachine;
     public MapManager mapManager;
     public Vector3 SpawnPoint;
     public GameObject Test;
     private void Awake()
     {
         mapManager = FindObjectOfType<MapManager>();
-
+        cinemachine = FindObjectOfType<CinemachinePlayerFind>();
         if (Instance == null)
         {
             Instance = this;
@@ -44,6 +45,8 @@ public class PlayerManager : MonoBehaviour
             Destroy(PlayerInstance);
         }
         PlayerInstance = Instantiate(PlayerPrefab, SpawnPos, Quaternion.identity);
+        
+        //cinemachine.SetPlayerInCinemachine();
 
     }
     /// <summary>
