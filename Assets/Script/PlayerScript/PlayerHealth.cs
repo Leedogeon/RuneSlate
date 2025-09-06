@@ -34,7 +34,10 @@ public class PlayerHealth : MonoBehaviour
 		UpdateGraphics();
 		timeleft = regenUpdateInterval; 
 	}
-	void Update ()
+
+
+
+    void Update ()
 	{
 		if (!FindPlayer()) return;
 

@@ -21,11 +21,24 @@ public class PlayerTimeLine : MonoBehaviour
     {
         Instance = this;
         Pd = GetComponent<PlayableDirector>();
-        
         cinemachineBrain = FindObjectOfType<FollowCamera>().GetComponent<CinemachineBrain>();
-
-
         TimelineAsset timeline = Pd.playableAsset as TimelineAsset;
+
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        SignalReceiver signalReceiver = FindObjectOfType<GameManager>().GetComponent<SignalReceiver>();
+        // 타임라인의 모든 트랙을 순회합니다.
+        foreach (var trackOutput in timeline.outputs)
+        {
+            // 트랙의 이름이 "Signal Track"인지 확인합니다.
+            // Timeline 에디터에서 Signal Track의 이름을 확인해야 합니다.
+            if (trackOutput.streamName == "Signal Track") // 또는 다른 Signal Track 이름
+            {
+                // Signal Track을 GameManager와 바인딩합니다.
+                Pd.SetGenericBinding(trackOutput.sourceObject, signalReceiver);
+                Debug.Log("Timeline의 Signal Track이 GameManager의 Signal Receiver와 성공적으로 연결되었습니다.");
+                break;
+            }
+        }
 
         foreach (var trackOutput in timeline.outputs)
         {
@@ -51,7 +64,7 @@ public class PlayerTimeLine : MonoBehaviour
                     CinemachineShot shot = clip.asset as CinemachineShot;
                     if (shot != null)
                     {
-                        var vcamObj = GameObject.Find("Trigger1").transform.Find("Vc"+num);
+                        var vcamObj = GameObject.Find("Trigger1").transform.Find("Vc" + num);
                         num++;
 
                         if (vcamObj != null)
@@ -75,8 +88,7 @@ public class PlayerTimeLine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
-        if(other.tag == "CutScene")
+        if (other.tag == "CutScene")
         {
             other.gameObject.SetActive(false);
             Pd.Play(Ta[0]);

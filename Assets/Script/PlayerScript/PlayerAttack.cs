@@ -8,7 +8,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]Rigidbody Rigid;
     LayerMask groundMask;
     [SerializeField] PlayerAnimationController animCon;
-    [SerializeField] public bool IsAttack = false;
+    [SerializeField] public bool[] IsAttack;
+    [SerializeField] LayerMask EnemyLayer;
+    bool CanAttack = true;
+    public int Blend;
     private void Awake()
     {
         input = transform.parent.GetComponentInChildren<PlayerInput>();
@@ -20,6 +23,17 @@ public class PlayerAttack : MonoBehaviour
     // 회전의 경우는 Update가 조금더 어울린다고 하여 우선 Update 사용
     void Update()
     {
+        if (!IsAttack[0] && !IsAttack[1])
+        {
+            GetComponent<BoxCollider>().enabled = false;
+            PlayerDataControll.AttackCantMove = false;
+        }
+        else
+        {
+            GetComponent<BoxCollider>().enabled = true;
+            PlayerDataControll.AttackCantMove = true;
+        }
+        if (IsAttack[1]) return;
         // 공격을 할 경우 마우스위치를 바라보면서 공격
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(input.AttackInput)
@@ -32,17 +46,36 @@ public class PlayerAttack : MonoBehaviour
                 // 회전
                 transform.parent.forward = dir.normalized;
 
-                animCon.Attack();
-                //StartCoroutine(Attack());
+
+                if (IsAttack[0])
+                    Blend = 1;
+                else Blend = 0;
+                StartCoroutine(Attack(Blend));
+                
             }
         }
+        
     }
 
-/*    public IEnumerator Attack()
+    private void OnTriggerEnter(Collider other)
     {
-        // 임시적용 - animCon.Attack(); 외에 기능없음
-        IsAttack = true;
-        yield return new WaitForSeconds(3f);
-        IsAttack = false;
-    }*/
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.layer == 20)
+        {
+            StartCoroutine(other.gameObject.GetComponent<Enemy>().Damaged());
+        }
+
+    }
+
+    public IEnumerator Attack(int Blend)
+    {
+        if(Blend == 1)
+        {
+            yield return new WaitWhile(() => IsAttack[0]);
+        }
+        animCon.Attack(Blend);
+        IsAttack[Blend] = true;
+        yield return new WaitWhile(() => IsAttack[Blend]);
+        IsAttack[Blend] = false;
+    }
 }

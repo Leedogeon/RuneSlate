@@ -16,4 +16,6 @@ public class SaveData
     public int playTime;
     public string Chapter;
 
+    public bool isStart;
+
 }

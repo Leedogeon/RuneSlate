@@ -15,10 +15,12 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] LayerMask Ground;
     [SerializeField] LayerMask mapWallLayer;
     [SerializeField] GameObject TestBlock;
+    [SerializeField] PlayerAnimationController anim;
     Vector3 direction;
     public void Awake()
     {
         movement = GetComponent<PlayerMovement>();
+        anim = transform.parent.GetComponentInChildren<PlayerAnimationController>();
     }
 /*    public IEnumerator Dash()
     {
@@ -87,6 +89,8 @@ public class PlayerDash : MonoBehaviour
     public IEnumerator Dash()
     {
         if (!canDash) yield break;
+        anim.Dash();
+
         isDash = true;
         canDash = false;
 

@@ -1,21 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
+
+// event로 플레이어가 소환될때 다른 스크립트에 자동 적용하기위해 변경
+// 다른 스크립트들에서 플레이어 적용방식 변경
+[System.Serializable]
+public class PlayerSpawnEvent : UnityEvent<Transform> { }
 public class PlayerManager : MonoBehaviour
 {
+
     // 여기서 플레이어를 인스턴스화, 관리
-    public static PlayerManager Instance { get; private set; }
+    public static PlayerManager Instance;
     public GameObject PlayerPrefab;
     public GameObject PlayerInstance { get; private set; }
 
+    public PlayerSpawnEvent OnPlayerSpawned = new PlayerSpawnEvent();
+
+
     public CinemachinePlayerFind cinemachine;
     public MapManager mapManager;
+    public GameManager gameManager;
     public Vector3 SpawnPoint;
     public GameObject Test;
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         mapManager = FindObjectOfType<MapManager>();
+        gameManager = FindObjectOfType<GameManager>();
         cinemachine = FindObjectOfType<CinemachinePlayerFind>();
         if (Instance == null)
         {
@@ -23,15 +47,20 @@ public class PlayerManager : MonoBehaviour
         }
         // 로드할 플레이어를 PlayerInstance로 변경
 
-        SaveLoad.LoadFromFile(PlayerDataControll.SaveLoadIndex);
-        if(PlayerDataControll.PlayerStartPosFromLoad != Vector3.zero)
+        bool isStart = SaveLoad.LoadFromFile(PlayerDataControll.SaveLoadIndex);
+
+        Debug.Log(isStart);
+        if (isStart)
         {
             SpawnPoint = PlayerDataControll.PlayerStartPosFromLoad;
+            PlayerDataControll.IsFileStart = true;
         }
-
+        else
+        {
+            PlayerDataControll.IsFileStart = false;
+        }
         SpawnStart();
     }
-
     /// <summary>
     /// 원하는 위치에 플레이어 소환
     /// </summary>
@@ -45,9 +74,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(PlayerInstance);
         }
         PlayerInstance = Instantiate(PlayerPrefab, SpawnPos, Quaternion.identity);
-        
-        //cinemachine.SetPlayerInCinemachine();
-
+        OnPlayerSpawned.Invoke(PlayerInstance.transform);
     }
     /// <summary>
     /// 0,0,0에 소환
@@ -63,5 +90,16 @@ public class PlayerManager : MonoBehaviour
         GameObject effect1 = Instantiate(Test, effectPos, Quaternion.Euler(-180, 0, 0));
 
         Destroy(effect1, 1f);
+    }
+
+    public void TestSpawn()
+    {
+        Destroy(PlayerInstance);
+
+        SpawnPlayer(SpawnPoint);
+    }
+
+    private void Update()
+    {
     }
 }

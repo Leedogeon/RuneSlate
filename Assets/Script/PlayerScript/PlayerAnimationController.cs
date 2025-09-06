@@ -6,27 +6,41 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] Animator anim;
     PlayerInput input;
+    Rigidbody rigid;
     bool IsAttack = false;
     private void Awake()
     {
         input = transform.parent.GetComponentInChildren<PlayerInput>();
         anim = GetComponentInParent<Animator>();
+        rigid = GetComponentInParent<Rigidbody>();
     }
-    public void MoveDirection(Vector2 moveInput, bool isWalk)
+
+    private void Update()
     {
-        if(moveInput.magnitude > .1f)
+        if(rigid.velocity.magnitude > .1f)
         {
             anim.SetBool("IsRunning", true);
-            anim.SetBool("IsWalk", isWalk);
+            if(rigid.velocity.magnitude < 3f)
+                anim.SetBool("IsWalk", true);
+            else
+                anim.SetBool("IsWalk", false);
         }
         else
         {
-            anim.SetBool("IsRunning", false);
             anim.SetBool("IsWalk", false);
+            anim.SetBool("IsRunning", false);
         }
     }
-    public void Attack()
+
+
+    public void Attack(int Blend)
     {
+        anim.SetFloat("Blend", Blend);
         anim.SetTrigger("OneHandAttack");
+    }
+
+    public void Dash()
+    {
+        anim.SetTrigger("Dodge");
     }
 }

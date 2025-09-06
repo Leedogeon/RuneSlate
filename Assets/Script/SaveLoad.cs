@@ -46,6 +46,9 @@ public static class SaveLoad
         data.hp = 100;
         data.level = 5;
 
+        // 파일이 첫시작인지 체크
+        data.isStart = true;
+
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(GetPath(slot), json);
 

@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isattack.IsAttack) return;
         // 이동값, normalized는 input에서 미리 처리
         Vector3 dir = new Vector3(input.MoveInput.x, 0, input.MoveInput.y).normalized;
         // 자연스럽게 하기위해 velocity 사용
@@ -46,22 +45,25 @@ public class PlayerMovement : MonoBehaviour
         if (Rigid.velocity.y > 0.5f) newVelocity.y = 0;
         else newVelocity.y = Rigid.velocity.y;
 
+
         Rigid.velocity = newVelocity;
 
-        if(input.DashInput)
+        if(PlayerDataControll.AttackCantMove)
+        {
+            Rigid.velocity = Vector3.zero;
+        }
+
+        if (input.DashInput)
         {
             StartCoroutine(Dash.Dash());
         }
-
-        animCon.MoveDirection(input.MoveInput,input.WalkInput);
 
         // 캐릭터의 forward를 이용해서 회전시킨다
         // Slerp를 이용하여 자연스럽게 회전하게 하고
         // 회전에 y값은 영향받지 않게 할려고 newVelocity가 아닌 dir을 이용
         // rotateSpeed는 적당히 자연스러운 느낌을 받게 커스텀 조정
         // 임시로 공격키가 입력중일땐 방향전환은 하지않도록 설정 - 이후 공격 모션도중 안하는걸로 수정
-        if (!input.AttackInput)
+        if (!PlayerDataControll.AttackCantMove)
         transform.parent.forward = Vector3.Slerp(transform.parent.forward, camRot * dir, Time.deltaTime * rotateSpeed);
-
     }
 }

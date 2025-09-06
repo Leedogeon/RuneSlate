@@ -9,10 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerInput input;
     [SerializeField] PlayerMovement Movement;
     [SerializeField] GameObject questionMark;
+    [SerializeField] PlayerAnimationController anim;
+    Rigidbody rigid;
+    [SerializeField] GameObject enemy;
     private void Awake()
     {
         input = GetComponentInChildren<PlayerInput>();
         Movement = GetComponentInChildren<PlayerMovement>();
+        rigid = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<PlayerAnimationController>();
     }
 
     void Start()
@@ -20,15 +25,19 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log(PlayerDataControll.CurQuestId);
+            Destroy(enemy);
+        }
     }
 
     public void SpawnQuestionMark()
     {
         Vector3 qPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2.3f, gameObject.transform.position.z);
         GameObject Mark = Instantiate(questionMark, qPos, Quaternion.identity);
-        StartCoroutine(StopPlayer());
-        Destroy(Mark,.3f);
+        //StartCoroutine(StopPlayer());
+        Destroy(Mark, 1f);
     }
     public IEnumerator StopPlayer()
     {
@@ -37,4 +46,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
     }
+
+
 }

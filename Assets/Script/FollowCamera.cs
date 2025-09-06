@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowCamera : MonoBehaviour
+public class FollowCamera : TargetingScript
 {
     [SerializeField] public Transform Player;
     [SerializeField] private Vector3 offset;
@@ -20,4 +20,5 @@ public class FollowCamera : MonoBehaviour
         transform.position = Player.position + offset;
 
     }
+
 }

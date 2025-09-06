@@ -11,7 +11,12 @@ public class PlayerAttackReset : StateMachineBehaviour
     {
         animator.ResetTrigger(triggerName);
         GameObject player = PlayerManager.Instance.PlayerInstance;
-
-        player.GetComponentInChildren<PlayerAttack>().IsAttack = false;
+        PlayerAttack attack = player.GetComponentInChildren<PlayerAttack>();
+        if (attack.IsAttack[0] || attack.IsAttack[1])
+        {
+            attack.IsAttack[0] = false;
+            attack.IsAttack[1] = false;
+        }
+        
     }
 }

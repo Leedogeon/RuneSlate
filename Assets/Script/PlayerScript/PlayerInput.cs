@@ -36,6 +36,12 @@ public class PlayerInput : MonoBehaviour
     }
     void Update()
     {
+        if (!PlayerDataControll.CanControll)
+        {
+            MoveInput = Vector2.zero;
+            return;
+        }
+
         if (!mapManager.CanInteraction) return;
         // 대각선 이동거리 문제로 인한 normalized는 인풋에서 처리
         //MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;

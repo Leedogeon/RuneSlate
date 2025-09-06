@@ -5,13 +5,14 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public Transform SpawnPoint;
+    public Transform NextPos;
     [SerializeField] private GameObject prologue;
     public bool CanInteraction = false;
     [SerializeField] private GameObject OptionPanel;
     [SerializeField] private GameObject HPUI;
     [SerializeField] private GameObject SaveLoadPanel;
+    [SerializeField] private GameObject TalkUI;
     public bool IsSaveLoadOpen = false;
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -28,8 +29,8 @@ public class MapManager : MonoBehaviour
                 invisivleObj(SaveLoadPanel);
             }
 
-        }
-        
+        }       
+
     }
 
     // 다른 Obj들에게도 적용하기위해 변경 - 08.01
@@ -47,6 +48,16 @@ public class MapManager : MonoBehaviour
             Debug.Log("SaveLoadOpen");
             IsSaveLoadOpen = false;
         }
+    }
+
+    public void TempStartTalk()
+    {
+        StartCoroutine(Test());
+    }
+    IEnumerator Test()
+    {
+        yield return new WaitForSeconds(1f);
+        TalkUI.SetActive(true);
     }
 
 }

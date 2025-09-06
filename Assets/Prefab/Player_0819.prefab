@@ -636,7 +636,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7871453887802199707}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2ae4564add1210b4ebe278ef069e7485, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -667,6 +667,8 @@ MonoBehaviour:
   input: {fileID: 0}
   Movement: {fileID: 0}
   questionMark: {fileID: 4285472108613674439, guid: 73d75b30cf9ec3743935658d6c0b8cbf, type: 3}
+  anim: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!114 &-737658108649504859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +700,8 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 5210087754824867315, guid: d0875c95840aede40944591d03063a77, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3226926033677856848, guid: d0875c95840aede40944591d03063a77, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
