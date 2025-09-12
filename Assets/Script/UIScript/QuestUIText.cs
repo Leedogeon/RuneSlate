@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class QuestUIText :TextManager
 {
+    GameManager gameManager;
     [SerializeField] Image BackImage;
     public float padding = 3f;
     private Dictionary<int, string> questTexts = new Dictionary<int, string>()
@@ -14,12 +15,18 @@ public class QuestUIText :TextManager
         {2, "마우스 좌클릭으로 적을 공격하라\n"},
         {3, "LEFT SHIFT로 적의 공격을 회피하라\n" },
         {4, "적들을 모두 제거하라 ({0}/6) " },
-        {5, "부서진 마차를 F키를 눌러 조사하자" }
+        {5, "보스를 쓰러트려라" },
+        {6, "부서진 마차를 F키를 눌러 조사하자" }
     };
     private Dictionary<int, int> questProgress = new Dictionary<int, int>()
     {
         {4,0 }
     };
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
     public void ShowQuest(int questId)
     {
         textUI.text = null;
@@ -49,11 +56,31 @@ public class QuestUIText :TextManager
     public void UpdateQuestProgress(int questId)
     {
         Debug.Log("EnemyDestroy");
-        if(questProgress.ContainsKey(4))
+
+        if(questId == 4)
         {
-            questProgress[4]++;
-            if(PlayerDataControll.CurQuestId == 3)
-                ShowQuest(2);
+            if (questProgress.ContainsKey(4))
+            {
+                questProgress[4]++;
+                if (PlayerDataControll.CurQuestId == 3)
+                    ShowQuest(2);
+
+
+                Debug.Log("quest = " + questProgress[4]);
+                if (questProgress[4] >= 6)
+                {
+                    if (gameManager != null)
+                    {
+                        Debug.Log("Spawned");
+                        gameManager.SpawnElite();
+                    }
+                }
+            }
+        }
+        
+        if(questId == 6)
+        {
+            ShowQuest(6);
         }
     }
 
