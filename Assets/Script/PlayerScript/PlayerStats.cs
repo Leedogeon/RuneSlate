@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerDefaultState defaultState = new PlayerDefaultState();
         maxHp = defaultState.BaseHp;
-        curHP = 10;
+        curHP = defaultState.BaseHp;
     }
     
 }

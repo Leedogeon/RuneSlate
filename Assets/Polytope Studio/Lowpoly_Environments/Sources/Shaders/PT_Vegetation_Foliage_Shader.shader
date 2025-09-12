@@ -223,7 +223,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader"
 			#endif
 			float4 TRANSLUCENCY497 = staticSwitch493;
 			o.Translucency = TRANSLUCENCY497.rgb;
-			o.Alpha = 1;
+			o.Alpha = .1f;
 			float GENERALALPHA505 = tex2DNode2.a;
 			float ALPHACUTOFF496 = ( 1.0 - step( GENERALALPHA505 , ( 1.0 - _LeavesThickness ) ) );
 			clip( ALPHACUTOFF496 - _MaskClipValue );

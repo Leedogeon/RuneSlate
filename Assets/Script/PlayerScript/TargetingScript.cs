@@ -7,7 +7,7 @@ public class TargetingScript : MonoBehaviour
 {
     protected Transform target;
 
-    void OnEnable()
+/*    void OnEnable()
     {
         if(PlayerManager.Instance != null)
         {
@@ -21,7 +21,7 @@ public class TargetingScript : MonoBehaviour
         {
             PlayerManager.Instance.OnPlayerSpawned.RemoveListener(OnPlayerSapwnedHandler);
         }
-    }
+    }*/
 
 
     protected virtual void OnPlayerSapwnedHandler(Transform newPlayerTransform)

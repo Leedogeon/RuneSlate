@@ -66,7 +66,7 @@ public static class SaveLoad
         {
             if (currentSceneName == "MainMenu")
             {
-                SceneManager.LoadSceneAsync("Tutorial");
+                SceneManager.LoadSceneAsync("Tutorial_Map");
                 return false;
             }
 
@@ -81,8 +81,10 @@ public static class SaveLoad
         Debug.Log($"X = {data.playerX} , Y = {data.playerY}, Z = {data.playerZ}");
 
         PlayerDataControll.PlayerStartPosFromLoad = new Vector3(data.playerX, data.playerY, data.playerZ);
+        PlayerDataControll.BaseHp = data.hp;
         PlayerDataControll.Lv = data.level;
         PlayerDataControll.PlayTime = data.playTime;
+        PlayerDataControll.IsFileStart = data.isStart;
 
         // 인스턴스가 있는상태라면 이동 -> 추가해야됨
         if(currentSceneName != "MainMenu")

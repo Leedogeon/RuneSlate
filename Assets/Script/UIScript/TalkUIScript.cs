@@ -29,8 +29,9 @@ public class TalkUIScript : TextManager
     {
         if (PlayerManager.Instance != null)
             target = PlayerManager.Instance.PlayerInstance.transform;
-        gameManager = FindObjectOfType<GameManager>();
+            gameManager = FindObjectOfType<GameManager>();
     }
+
 
     // 말풍선 위치 설정
     public void setBalloonPos()
