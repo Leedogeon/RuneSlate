@@ -13,6 +13,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject SaveLoadPanel;
     [SerializeField] private GameObject TalkUI;
     public bool IsSaveLoadOpen = false;
+
+    [SerializeField] public Vector3 ElitePos;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
