@@ -21,18 +21,23 @@ public class Enemy : MonoBehaviour
     [SerializeField]Transform TargetPos;
     Animator anim;
 
-    [SerializeField] public int Hp; 
+    [SerializeField] public int Hp = 30;
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
-    private void Update()
+    protected void Update()
     {
 
         anim.SetBool("isChasing", isChasing);
 
         anim.SetBool("isAttack", isAttack);
+
+    }
+
+    protected virtual void FixedUpdate()
+    {
         if (TargetPos == null)
         {
             isChasing = false;
@@ -44,8 +49,6 @@ public class Enemy : MonoBehaviour
         {
             Chasing(TargetPos);
         }
-
-
     }
 
     public void Chasing(Transform FindObj)
@@ -89,7 +92,7 @@ public class Enemy : MonoBehaviour
             Hp -= 10;
             if (Hp <= 0)
             {
-                Death();
+                Death(PlayerDataControll.TutorialEnemyDeathQuestId);
             }
         }
         yield return null;
@@ -119,9 +122,11 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(gameObject.transform.position, worldRadius);
     }*/
 
-    public void Death()
+    public virtual void Death(int Index)
     {
-        OnEnemyDeath?.Invoke(PlayerDataControll.TutorialEnemyDeathQuestId);
+        OnEnemyDeath?.Invoke(Index);
         Destroy(gameObject);
     }
+
+
 }
