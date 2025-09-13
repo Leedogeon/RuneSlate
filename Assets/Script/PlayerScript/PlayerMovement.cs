@@ -30,25 +30,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 이동값, normalized는 input에서 미리 처리
+        /*        // 이동값, normalized는 input에서 미리 처리
+                Vector3 dir = new Vector3(input.MoveInput.x, 0, input.MoveInput.y).normalized;
+                // 자연스럽게 하기위해 velocity 사용
+                // 카메라 회전값을 적용
+                float targetAngle = cam.eulerAngles.y;
+                Quaternion camRot = Quaternion.Euler(0, targetAngle, 0);
+                //Rigid.velocity = dir * speed;
+                // 중력의 영향을 정상적으로 받기위해 y값을 따로 설정
+                // x,z값의 경우 speed의 영향을 받아야하니 먼저 곱해주고 y값은 따로 설정
+
+                // vector3와 Quaternion은 Quaternion*vector3 순서로 해야됨
+                Vector3 newVelocity = camRot * dir * speed * (input.WalkInput ? walkSpeed : 1 ) ;
+                if (Rigid.velocity.y > 0.5f) newVelocity.y = 0;
+                else newVelocity.y = Rigid.velocity.y;
+
+
+                Rigid.velocity = newVelocity;*/
+
         Vector3 dir = new Vector3(input.MoveInput.x, 0, input.MoveInput.y).normalized;
-        // 자연스럽게 하기위해 velocity 사용
-        // 카메라 회전값을 적용
         float targetAngle = cam.eulerAngles.y;
         Quaternion camRot = Quaternion.Euler(0, targetAngle, 0);
-        //Rigid.velocity = dir * speed;
-        // 중력의 영향을 정상적으로 받기위해 y값을 따로 설정
-        // x,z값의 경우 speed의 영향을 받아야하니 먼저 곱해주고 y값은 따로 설정
+        Vector3 moveDir = camRot * dir;
 
-        // vector3와 Quaternion은 Quaternion*vector3 순서로 해야됨
-        Vector3 newVelocity = camRot * dir * speed * (input.WalkInput ? walkSpeed : 1 ) ;
-        if (Rigid.velocity.y > 0.5f) newVelocity.y = 0;
-        else newVelocity.y = Rigid.velocity.y;
+        // 현재 바닥의 노멀을 가져오기 (Raycast)
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.2f))
+        {
+            // 이동 방향을 바닥에 맞게 투영
+            moveDir = Vector3.ProjectOnPlane(moveDir, hit.normal).normalized;
+        }
 
+        Vector3 newVelocity = moveDir * speed * (input.WalkInput ? walkSpeed : 1);
+
+        // y는 중력값 유지
+        newVelocity.y = Rigid.velocity.y;
 
         Rigid.velocity = newVelocity;
 
-        if(PlayerDataControll.AttackCantMove)
+        if (PlayerDataControll.AttackCantMove)
         {
             Rigid.velocity = Vector3.zero;
         }
