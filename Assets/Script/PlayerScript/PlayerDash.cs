@@ -116,7 +116,7 @@ public class PlayerDash : MonoBehaviour
             targetPos = startPos + direction * movement.speed;
         }
 
-        Debug.Log("direction = " + direction.normalized);
+        //Debug.Log("direction = " + direction.normalized);
 
         float duration = .3f;
         float elapsed = 0f;
@@ -137,7 +137,7 @@ public class PlayerDash : MonoBehaviour
 
             // 앞으로 1m, 아래로 1m 지점에 레이를 쏴서 지형 경사 감지
             RaycastHit hit;
-            if (Physics.Raycast(rigid.position + direction * 1f + Vector3.up * 1f, Vector3.down, out hit, 2f, Ground))
+            if (Physics.Raycast(rigid.position + direction * 1f + Vector3.up * 1f, Vector3.down, out hit, 1f, Ground))
             {
                 // 지형의 법선 벡터(normal)를 얻어옴
                 Vector3 groundNormal = hit.normal;
@@ -146,7 +146,7 @@ public class PlayerDash : MonoBehaviour
                 float slopeAngle = Vector3.Angle(Vector3.up, groundNormal);
 
                 // 경사각이 45도를 넘으면 이동을 멈춥니다.
-                if (slopeAngle > 45f)
+                if (slopeAngle >= 20f)
                 {
                     Debug.Log("Wall");
                     // 벽에 닿으면 최종 목적지를 hit.point로 변경

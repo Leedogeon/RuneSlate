@@ -7,12 +7,12 @@ public class PlayerStats : MonoBehaviour
     public float maxHp;
     public float curHP;
 
-    [SerializeField]PlayerHealth healthUI;
+    [SerializeField]PlayerHPUIScript healthUI;
 
     private void Awake()
     {
         LoadPlayerDefaultStats();
-        healthUI = FindObjectOfType<PlayerHealth>(true);
+        healthUI = FindObjectOfType<PlayerHPUIScript>(true);
 
     }
     public void LoadPlayerDefaultStats()

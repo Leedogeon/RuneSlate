@@ -834,6 +834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4724861665533992795, guid: 3348a14226540e149b19854b757b585e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4928807908066540556, guid: 3348a14226540e149b19854b757b585e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -917,6 +921,22 @@ PrefabInstance:
     - target: {fileID: 5475684267300797890, guid: 3348a14226540e149b19854b757b585e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727626071870369552, guid: 3348a14226540e149b19854b757b585e, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727626071870369552, guid: 3348a14226540e149b19854b757b585e, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727626071870369552, guid: 3348a14226540e149b19854b757b585e, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727626071870369552, guid: 3348a14226540e149b19854b757b585e, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 9119164956945445988, guid: 3348a14226540e149b19854b757b585e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1094,7 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -1666,7 +1686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ef65ac58af49c8c4e8c11a24f4153d5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a79657029f41374eabca24686ee3f19, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

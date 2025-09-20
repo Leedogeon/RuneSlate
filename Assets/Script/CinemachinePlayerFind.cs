@@ -33,7 +33,7 @@ public class CinemachinePlayerFind : TargetingScript
     [SerializeField] private Color rayColor = Color.yellow;
 
     private RaycastHit hit;
-    private Color originalColor = new Color(1, 1, 1, 1);
+    private Color originalColor;
 
     private List<Renderer> currentHits = new List<Renderer>();
     private List<Renderer> previousHits = new List<Renderer>();
@@ -60,7 +60,7 @@ public class CinemachinePlayerFind : TargetingScript
 
             Renderer rend = h.collider.GetComponent<Renderer>();
 
-         
+
 
             if (rend != null)
             {

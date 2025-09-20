@@ -97,6 +97,6 @@ public class GameManager : MonoBehaviour
         // 최종값 보정
         Boss.transform.localScale = targetScale;
         PlayerDataControll.CanControll = true;
-        Boss.GetComponent<Enemy_TutorialBoss>().CanAttack = true;
+        Boss.GetComponent<Enemy_TutorialBoss>().CanAttack_B = true;
     }
 }

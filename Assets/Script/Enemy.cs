@@ -21,7 +21,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]Transform TargetPos;
     Animator anim;
 
-    [SerializeField] public int Hp = 30;
+    [SerializeField] public float maxHp = 30;
+    [SerializeField] public float Hp = 30;
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Enemy_TutorialBoss : Enemy
 {
-    public bool CanAttack = false;
+    public bool CanAttack_B = false;
     private void Awake()
     {
+        maxHp = 50;
         Hp = 50;
     }
 
@@ -17,7 +18,7 @@ public class Enemy_TutorialBoss : Enemy
 
     protected override void FixedUpdate()
     {
-        if (!CanAttack) return;
+        if (!CanAttack_B) return;
         base.FixedUpdate();
     }
 

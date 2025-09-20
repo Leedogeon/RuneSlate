@@ -9,6 +9,7 @@ TagManager:
   - CutScene
   - Enemy
   - Knight
+  - InteractionObj
   layers:
   - Default
   - TransparentFX
