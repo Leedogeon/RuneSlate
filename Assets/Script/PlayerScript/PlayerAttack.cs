@@ -62,7 +62,8 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == 20)
         {
-            StartCoroutine(other.gameObject.GetComponent<Enemy>().Damaged());
+            if(other.gameObject.GetComponent<Enemy>())
+                StartCoroutine(other.gameObject.GetComponent<Enemy>().Damaged());
         }
 
     }

@@ -12,29 +12,29 @@ public class Enemy : MonoBehaviour
     float radius = 10f;
     [SerializeField] LayerMask layerMask;
     Collider[] hits;
-    Rigidbody rigid;
+    protected Rigidbody rigid;
+    MapManager mapManager;
 
-    [SerializeField] float speed = 3f;
-    bool isChasing = false;
-    bool isAttack = false;
-    bool CanAttack = true;
+    [SerializeField] protected float speed = 3f;
+    protected bool isChasing = false;
+    protected bool isAttack = false;
+    protected bool CanAttack = true;
     [SerializeField]Transform TargetPos;
-    Animator anim;
+    protected Animator anim;
 
     [SerializeField] public float maxHp = 30;
     [SerializeField] public float Hp = 30;
-    private void Start()
+    protected virtual void Start()
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        mapManager = mapManager = FindObjectOfType<MapManager>();
     }
     protected void Update()
     {
-
         anim.SetBool("isChasing", isChasing);
 
         anim.SetBool("isAttack", isAttack);
-
     }
 
     protected virtual void FixedUpdate()
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Chasing(Transform FindObj)
+    public virtual void Chasing(Transform FindObj)
     {
         float distance = Vector3.Distance(transform.position, FindObj.transform.position);
 
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator Attack()
+    public virtual IEnumerator Attack()
     {
         CanAttack = false;
         isAttack = true;
@@ -93,7 +93,9 @@ public class Enemy : MonoBehaviour
             Hp -= 10;
             if (Hp <= 0)
             {
-                Death(PlayerDataControll.TutorialEnemyDeathQuestId);
+                anim.SetTrigger("isDeath");
+                if(maxHp <= 30)
+                    Death(PlayerDataControll.TutorialEnemyDeathQuestId);
             }
         }
         yield return null;
@@ -125,6 +127,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Death(int Index)
     {
+        mapManager.ElitePos = this.transform.position;
         OnEnemyDeath?.Invoke(Index);
         Destroy(gameObject);
     }

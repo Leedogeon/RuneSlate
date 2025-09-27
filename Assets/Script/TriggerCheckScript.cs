@@ -12,6 +12,17 @@ public class TriggerCheckScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
             triggerScript.OnChildTrigger(gameObject, UIIndex);
-        Destroy(Knights);
+
+        if(Knights != null)
+        {
+            foreach (Transform child in Knights.transform)
+            {
+                GameObject k = child.gameObject;
+
+                k.GetComponent<KnightScript>().Death();
+
+            }
+
+        }
     }
 }

@@ -7,8 +7,8 @@ public class Enemy_TutorialBoss : Enemy
     public bool CanAttack_B = false;
     private void Awake()
     {
-        maxHp = 50;
-        Hp = 50;
+        maxHp = 100;
+        Hp = 100;
     }
 
     public override void Death(int index)
@@ -21,5 +21,7 @@ public class Enemy_TutorialBoss : Enemy
         if (!CanAttack_B) return;
         base.FixedUpdate();
     }
+
+
 
 }

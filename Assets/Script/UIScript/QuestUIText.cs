@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class QuestUIText :TextManager
 {
     GameManager gameManager;
-    [SerializeField] Image BackImage;
+    [SerializeField] Image[] BackImage;
     public float padding = 3f;
     private Dictionary<int, string> questTexts = new Dictionary<int, string>()
     {
@@ -30,6 +30,18 @@ public class QuestUIText :TextManager
     public void ShowQuest(int questId)
     {
         textUI.text = null;
+
+        if (questId == 2)
+        {
+            BackImage[1].gameObject.SetActive(true);
+            BackImage[0].gameObject.SetActive(false);
+        }
+        else
+        {
+            BackImage[0].gameObject.SetActive(true);
+            BackImage[1].gameObject.SetActive(false);
+        }
+
         if (questId == 2)
         {
             textUI.text += questTexts[2];
@@ -48,9 +60,10 @@ public class QuestUIText :TextManager
                 textUI.text = null;
         }
 
-        float textHeight = textUI.preferredHeight;
-        RectTransform imgRecTransform = BackImage.GetComponent<RectTransform>();
-        imgRecTransform.sizeDelta = new Vector2(imgRecTransform.sizeDelta.x, textHeight + 3f);
+        // 텍스트 길이에따른 Height값 변경 제거
+        //float textHeight = textUI.preferredHeight;
+        //RectTransform imgRecTransform = BackImage[0].GetComponent<RectTransform>();
+        //imgRecTransform.sizeDelta = new Vector2(imgRecTransform.sizeDelta.x, textHeight + 3f);
 
     }
     public void UpdateQuestProgress(int questId)

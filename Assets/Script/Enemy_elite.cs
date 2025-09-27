@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_elite : Enemy
 {
-    MapManager mapManager;
+/*    MapManager mapManager;
 
     protected void Awake()
     {
@@ -15,5 +15,5 @@ public class Enemy_elite : Enemy
     {
         mapManager.ElitePos = this.transform.position;
         base.Death(PlayerDataControll.TutorialEnemyDeathQuestId);
-    }
+    }*/
 }

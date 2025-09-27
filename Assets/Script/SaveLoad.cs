@@ -66,7 +66,7 @@ public static class SaveLoad
         {
             if (currentSceneName == "MainMenu")
             {
-                SceneManager.LoadSceneAsync("Tutorial_Map");
+                SceneManager.LoadSceneAsync("RuneSlate_Tutorial_Map");
                 return false;
             }
 

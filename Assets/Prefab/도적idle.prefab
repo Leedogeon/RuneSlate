@@ -132,6 +132,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -2916819609819138460, guid: 95f7ae066ea5ad9498bde223ba884b0b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c99567f19fb0a3741bb57a478e32bd07, type: 2}
     - target: {fileID: -2815194613554758484, guid: 95f7ae066ea5ad9498bde223ba884b0b, type: 3}
       propertyPath: m_Layer
       value: 20
@@ -204,6 +208,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2047094019479875309, guid: 95f7ae066ea5ad9498bde223ba884b0b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 83aeebcaba2e0594e9bc8e5efb1ed287, type: 2}
     - target: {fileID: 2715566404302941441, guid: 95f7ae066ea5ad9498bde223ba884b0b, type: 3}
       propertyPath: m_Layer
       value: 20
@@ -378,4 +386,5 @@ MonoBehaviour:
     m_Bits: 2097160
   speed: 3
   TargetPos: {fileID: 0}
+  maxHp: 30
   Hp: 30

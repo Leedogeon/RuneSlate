@@ -87,9 +87,9 @@ public class SaveLoadButton : MonoBehaviour
         {
             manager.IsSaveLoadOpen = false;
         }
-        if(currentSceneName == "MainMenu")
+        if(currentSceneName == "RuneSlate_MainMenu")
         {
-            SceneManager.LoadSceneAsync("Tutorial_Map");
+            SceneManager.LoadSceneAsync("RuneSlate_Tutorial_Map");
         }
     }
 

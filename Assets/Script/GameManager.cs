@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] MapManager mapManager;
     [SerializeField] GameObject ElitePref;
     [SerializeField] GameObject SpawnEffect;
+    [SerializeField] GameObject BossPref;
+    [SerializeField] public GameObject BossHPUI;
     private void OnEnable()
     {
         Enemy.OnEnemyDeath += QuestUIText.UpdateQuestProgress;
@@ -94,9 +96,21 @@ public class GameManager : MonoBehaviour
         Destroy(Effect);
         QuestOpen(5);
 
+
+        Destroy(Boss);
+        StartCoroutine(BossChange());
+
+
         // 최종값 보정
-        Boss.transform.localScale = targetScale;
-        PlayerDataControll.CanControll = true;
-        Boss.GetComponent<Enemy_TutorialBoss>().CanAttack_B = true;
+//        Boss.transform.localScale = targetScale;
+/*        PlayerDataControll.CanControll = true;
+        Boss.GetComponent<Enemy_TutorialBoss>().CanAttack_B = true;*/
+    }
+
+    IEnumerator BossChange()
+    {
+        GameObject Boss_R = Instantiate(BossPref,mapManager.ElitePos,BossPref.transform.rotation);
+        BossHPUI.SetActive(true);
+        yield return null;
     }
 }
