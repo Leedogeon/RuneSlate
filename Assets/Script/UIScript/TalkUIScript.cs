@@ -15,6 +15,7 @@ public class TalkUIScript : TextManager
 
     [SerializeField] QuestUIText quest;
     [SerializeField] GameManager gameManager;
+    [SerializeField] GameObject FadeOutPannel;
 
     private Dictionary<int, string> TalkUIForPlayer = new Dictionary<int, string>()
     {
@@ -97,6 +98,11 @@ public class TalkUIScript : TextManager
 
         PlayerDataControll.CurTalkId++;
 
+        if(PlayerDataControll.CurTalkId == 6)
+        {
+            FadeOutPannel.SetActive(true);
+            FadeOutPannel.GetComponent<ScreenFader>().FadeStart();
+        }
 
         if (TalkId == 2)
         {

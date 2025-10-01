@@ -142,9 +142,11 @@ MonoBehaviour:
   Rigid: {fileID: 0}
   animCon: {fileID: 0}
   IsAttack: 0000
+  IsAttack_: 0
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 1048576
+  CanAttack: 1
   Blend: 0
 --- !u!114 &8707060750263947664
 MonoBehaviour:

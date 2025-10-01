@@ -25,7 +25,7 @@ public static class PlayerDataControll
 
     public static Vector3 ReSpawnPoint;
 
-
+    public static bool NPC1CanTalk = false;
 
 
 

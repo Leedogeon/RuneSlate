@@ -6,6 +6,7 @@ public class KnightDeathScript : StateMachineBehaviour
 {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Destroy(animator.gameObject);
+        animator.GetComponent<Animator>().enabled = false;
+        //Destroy(animator.gameObject);
     }
 }

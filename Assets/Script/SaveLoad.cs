@@ -64,7 +64,7 @@ public static class SaveLoad
 
         if (!File.Exists(path))
         {
-            if (currentSceneName == "MainMenu")
+            if (currentSceneName == "RuneSlate_MainMenu")
             {
                 SceneManager.LoadSceneAsync("RuneSlate_Tutorial_Map");
                 return false;

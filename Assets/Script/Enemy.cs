@@ -15,12 +15,12 @@ public class Enemy : MonoBehaviour
     protected Rigidbody rigid;
     MapManager mapManager;
 
-    [SerializeField] protected float speed = 3f;
-    protected bool isChasing = false;
-    protected bool isAttack = false;
-    protected bool CanAttack = true;
+    [SerializeField] protected float speed = 2.5f;
+    public bool isChasing = false;
+    public bool isAttack = false;
+    public bool CanAttack = true;
     [SerializeField]Transform TargetPos;
-    protected Animator anim;
+    public Animator anim;
 
     [SerializeField] public float maxHp = 30;
     [SerializeField] public float Hp = 30;
@@ -48,12 +48,27 @@ public class Enemy : MonoBehaviour
 
         if(TargetPos != null)
         {
+            if (TargetPos.GetComponent<KnightScript>())
+            {
+                if (TargetPos.GetComponent<KnightScript>().hp <=0)
+                {
+                    TargetPos = null;
+                    return;
+                }
+            }
+
             Chasing(TargetPos);
         }
     }
 
     public virtual void Chasing(Transform FindObj)
     {
+        if(!CanAttack)
+        {
+            rigid.velocity = Vector3.zero;
+            return;
+        }
+
         float distance = Vector3.Distance(transform.position, FindObj.transform.position);
 
         
@@ -78,12 +93,19 @@ public class Enemy : MonoBehaviour
 
     public virtual IEnumerator Attack()
     {
+        /*        CanAttack = false;
+                isAttack = true;
+                yield return new WaitForSeconds(1f);
+                isAttack = false;
+                yield return new WaitForSeconds(1.5f);
+                CanAttack = true;*/
         CanAttack = false;
         isAttack = true;
-        yield return new WaitForSeconds(1f);
-        isAttack = false;
-        yield return new WaitForSeconds(1.5f);
-        CanAttack = true;
+        anim.SetTrigger("Attack");
+
+        yield return null;
+/*        CanAttack = true;
+        isAttack = false;*/
     }
     public IEnumerator Damaged()
     {
@@ -93,8 +115,11 @@ public class Enemy : MonoBehaviour
             Hp -= 10;
             if (Hp <= 0)
             {
+                rigid.velocity = Vector3.zero;
+                GetComponent<Rigidbody>().useGravity = false;
+                GetComponent<CapsuleCollider>().isTrigger = true;
                 anim.SetTrigger("isDeath");
-                if(maxHp <= 30)
+                if (maxHp <= 30)
                     Death(PlayerDataControll.TutorialEnemyDeathQuestId);
             }
         }
@@ -104,6 +129,7 @@ public class Enemy : MonoBehaviour
     public void Detect()
     {
         isAttack = false;
+
         hits = Physics.OverlapSphere(gameObject.transform.position, radius, layerMask);
         if(TargetPos == null)
         {
@@ -127,9 +153,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void Death(int Index)
     {
+/*        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<CapsuleCollider>().isTrigger = true;*/
         mapManager.ElitePos = this.transform.position;
         OnEnemyDeath?.Invoke(Index);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
 

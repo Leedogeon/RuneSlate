@@ -33,9 +33,9 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
 
-    public void Attack(int Blend)
+    public void Attack()
     {
-        anim.SetFloat("Blend", Blend);
+        //anim.SetFloat("Blend", Blend);
         anim.SetTrigger("OneHandAttack");
     }
 

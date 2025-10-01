@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerAnimationController anim;
     Rigidbody rigid;
     [SerializeField] GameObject enemy;
+    [SerializeField] bool CanF = false;
+    [SerializeField] NPCScript npcScript;
     private void Awake()
     {
         input = GetComponentInChildren<PlayerInput>();
@@ -30,6 +32,14 @@ public class Player : MonoBehaviour
             Debug.Log(PlayerDataControll.CurQuestId);
             Destroy(enemy);
         }
+
+        if(CanF && Input.GetKeyDown(KeyCode.F))
+        {
+            if(npcScript != null)
+            {
+                npcScript.TalkOpen();
+            }
+        }
     }
 
     public void SpawnQuestionMark()
@@ -47,5 +57,29 @@ public class Player : MonoBehaviour
         Time.timeScale = 1;
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "InteractionObj")
+        {
+            CanF = true;
+            npcScript = collision.gameObject.GetComponent<NPCScript>();
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "InteractionObj")
+        {
+            CanF = true;
+            npcScript = collision.gameObject.GetComponent<NPCScript>();
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "InteractionObj")
+        {
+            CanF = false;
+        }
+    }
 
 }

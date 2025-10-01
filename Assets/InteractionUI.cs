@@ -16,7 +16,7 @@ public class InteractionUI : MonoBehaviour
         for (int i = 0; i < objs.Length; i++)
         {
             InteractionObjs.Add(objs[i].transform);
-            GameObject InteractionKey = Instantiate(InteractionUIPref, objs[i].transform.position, Quaternion.identity, transform);
+            GameObject InteractionKey = Instantiate(InteractionUIPref, objs[i].transform.position + new Vector3(0f,2.6f,-2.25f), Quaternion.identity, transform);
             Keys.Add(InteractionKey);
             Keys[i].SetActive(false);
         }

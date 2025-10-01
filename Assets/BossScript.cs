@@ -14,12 +14,14 @@ public class BossScript : Enemy
         base.Start();
         anim.SetTrigger("Start");
     }
-    public override void Death(int index)
+/*    public override void Death(int index)
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.BossHPUI.SetActive(false);
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<CapsuleCollider>().isTrigger = true;
         base.Death(6);
-    }
+    }*/
 
     protected override void FixedUpdate()
     {
@@ -33,6 +35,12 @@ public class BossScript : Enemy
         {
             return;
         }
+        if (!CanAttack)
+        {
+            rigid.velocity = Vector3.zero;
+            return;
+        }
+
 
         float distance = Vector3.Distance(transform.position, FindObj.transform.position);
 

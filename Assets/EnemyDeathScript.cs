@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyDeathScript : StateMachineBehaviour
 {
+    GameObject enemy;
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Destroy(animator.gameObject);
+        enemy = animator.gameObject;
     }
 }

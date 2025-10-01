@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
     IEnumerator BossChange()
     {
         GameObject Boss_R = Instantiate(BossPref,mapManager.ElitePos,BossPref.transform.rotation);
+        Boss_R.transform.LookAt(PlayerManager.Instance.PlayerInstance.transform.position);
         BossHPUI.SetActive(true);
         yield return null;
     }

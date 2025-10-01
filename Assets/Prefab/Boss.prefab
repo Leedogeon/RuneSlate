@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -7165952518620044429, guid: 74e32c75a6955b94d8bf1a668897c873, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 915b1983e4873db43b29bd6312205284, type: 2}
     - target: {fileID: -6159746482488331217, guid: 74e32c75a6955b94d8bf1a668897c873, type: 3}
       propertyPath: m_Layer
       value: 20
@@ -365,7 +369,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   speed: 3
+  isChasing: 0
+  isAttack: 0
+  CanAttack: 1
   TargetPos: {fileID: 0}
+  anim: {fileID: 0}
   maxHp: 30
   Hp: 30
   CanAttack_B: 1

@@ -13,7 +13,16 @@ public class BossDeathCheck : StateMachineBehaviour
         
         if(Boss.GetComponent<BossScript>())
         {
-            Boss.GetComponent<BossScript>().Death(6);
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.BossHPUI.SetActive(false);
+            Boss.GetComponent<BossScript>().anim.enabled = false;
+            NPCScript nPCScript = FindObjectOfType<NPCScript>();
+            if(nPCScript != null)
+            {
+                PlayerDataControll.NPC1CanTalk = true;
+            }
+
+
         }
 
     }

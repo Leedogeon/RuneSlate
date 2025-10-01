@@ -32,7 +32,7 @@ public class EnemyHpBar : MonoBehaviour
     {
         for (int i = objList.Count - 1; i >= 0; i--) // 뒤에서부터 지워야 안전
         {
-            if (objList[i] == null) // 적이 Destroy된 경우
+            if (objList[i].GetComponent<Enemy>().Hp <=0) // 적이 Destroy된 경우
             {
                 Destroy(hpBarList[i]);     // hp바 제거
                 objList.RemoveAt(i);       // 리스트에서 제거
